@@ -188,6 +188,12 @@ vim.keymap.set('i', '<C-H>', '<C-W>', { noremap = true })
 vim.keymap.set('v', '<C-c>', '+y', { noremap = true })
 vim.keymap.set('i', '<C-v>', '<C-[>+pa', { noremap = true })
 
+-- Improve insert mode (useful when jumping in and out of normal mode)
+vim.keymap.set('i', '<M-h>', '<C-[>ha', { desc = 'Move cursor left without leaving insert mode' })
+vim.keymap.set('i', '<M-j>', '<C-[>ja', { desc = 'Move cursor down without leaving insert mode' })
+vim.keymap.set('i', '<M-k>', '<C-[>ka', { desc = 'Move cursor up without leaving insert mode' })
+vim.keymap.set('i', '<M-l>', '<C-[>la', { desc = 'Move cursor right without leaving insert mode' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -652,7 +658,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        python = { 'isort', 'black' },
+        -- python = { 'isort', 'black' },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
