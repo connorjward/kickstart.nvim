@@ -157,10 +157,10 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+-- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -188,11 +188,19 @@ vim.keymap.set('i', '<C-H>', '<C-W>', { noremap = true })
 vim.keymap.set('v', '<C-c>', '+y', { noremap = true })
 vim.keymap.set('i', '<C-v>', '<C-[>+pa', { noremap = true })
 
--- Improve insert mode (useful when jumping in and out of normal mode)
-vim.keymap.set('i', '<M-h>', '<C-[>ha', { desc = 'Move cursor left without leaving insert mode' })
-vim.keymap.set('i', '<M-j>', '<C-[>ja', { desc = 'Move cursor down without leaving insert mode' })
-vim.keymap.set('i', '<M-k>', '<C-[>ka', { desc = 'Move cursor up without leaving insert mode' })
-vim.keymap.set('i', '<M-l>', '<C-[>la', { desc = 'Move cursor right without leaving insert mode' })
+-- Hold <Alt> to make insert mode like normal mode (useful when jumping in and out of normal mode)
+vim.keymap.set('i', '<M-h>', '<Left>', { desc = 'Move cursor left without leaving insert mode' })
+vim.keymap.set('i', '<M-j>', '<Down>', { desc = 'Move cursor down without leaving insert mode' })
+vim.keymap.set('i', '<M-k>', '<Up>', { desc = 'Move cursor up without leaving insert mode' })
+vim.keymap.set('i', '<M-l>', '<Right>', { desc = 'Move cursor right without leaving insert mode' })
+
+-- doesn't seem to work
+-- <Shift>-<Enter> puts a line above the cursor
+vim.keymap.set('i', '<S-CR>', '<C-[>O', { desc = 'Insert line above cursor' })
+
+-- Also make <ctrl>-c and <ctrl>-v do the typical thing
+vim.keymap.set('v', '<C-c>', '+y', { noremap = true })
+vim.keymap.set('i', '<C-v>', '<C-[>+pa', { noremap = true })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -573,6 +581,7 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         pyright = {},
+        texlab = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -734,13 +743,7 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
-
-          -- If you prefer more traditional completion keymaps,
-          -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          ['<C-<CR>>'] = cmp.mapping.confirm { select = true },
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
