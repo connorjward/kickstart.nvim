@@ -173,6 +173,11 @@ vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move focus to the right window'
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move focus to the lower window', noremap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move focus to the upper window', noremap = true })
 
+vim.keymap.set('n', '<C-Left>', '<C-w><', { desc = 'Reduce window width', noremap = true })
+vim.keymap.set('n', '<C-Right>', '<C-w>>', { desc = 'Increase window width', noremap = true })
+vim.keymap.set('n', '<C-Down>', '<C-w>-', { desc = 'Reduce window height', noremap = true })
+vim.keymap.set('n', '<C-Up>', '<C-w>+', { desc = 'Increase window height', noremap = true })
+
 -- Terminal mode keymaps
 vim.keymap.set('t', '<C-[>', '<C-\\><C-n>', { desc = 'Exit terminal mode', noremap = true })
 vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-w>h', { desc = 'Exit terminal mode and move focus to the left window', noremap = true })
